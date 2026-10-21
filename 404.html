@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body><title>نسخة عرض ncfb.sa</title>
+<meta name="robots" content="noindex">
+<script src="demo-mock.js"></script>
+
+  <meta charset="utf-8">
+  
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A brief description of NCFB content here.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- Critical CSS is now moved to external file -->
+  <!-- Inline script to check route and control loader visibility early -->
+  <script>
+    // Immediately check if we're on root path (/ or empty path)
+    (function () {
+      var path = window.location.pathname;
+      var isRootPath = path === '/home' || path === '' || path.match(/^\/?index\.html$/i);
+      // Store this information for later use
+      window.showInitialLoader = isRootPath;
+      // Add a class to the HTML element for CSS control
+      document.documentElement.className += isRootPath ? ' is-home-route' : ' is-not-home-route';
+    })();
+  </script>
+  <!-- Load critical CSS for faster FCP -->
+  <link rel="preload" href="assets/scss/critical.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <style>:root{--primary-dark:#023b50;--primary:#02AFD4}.app-loading{position:fixed;top:0;left:0;width:100%;height:100%;background-color:var(--primary-dark);background-image:url('/assets/images/home/building-top-banner.webp');background-position:center 40px;background-repeat:no-repeat;background-size:cover;z-index:999;opacity:1;transition:opacity 0.3s ease-out}@media (max-width: 576px){.app-loading{background-image:url('/assets/images/home/building-top-banner-mobile.webp')}}.app-loading-overlay{position:absolute;top:50%;left:0;height:50%;width:100%;background:linear-gradient(to bottom, transparent 0%, rgba(2, 59, 80, 1) 105%, rgba(2, 59, 80, 1) 100%)}.spinner{position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-20px;width:40px;height:40px;border:4px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 1s ease-in-out infinite}@keyframes spin{to{transform:rotate(360deg)}}</style><link rel="stylesheet" href="assets/scss/critical.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="assets/scss/critical.css"></noscript>
+  </noscript>
+  <!-- Critical inline styles for faster LCP -->
+  <style>
+    /* Minimal reference to fadeIn animation to ensure it's not stripped in production */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Inline critical styles for the loading element (LCP element) */
+    html.is-not-home-route .app-loading {
+      display: none !important;
+    }
+
+    .app-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: linear-gradient(0deg, #02afd4, #023b50);
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .app-loading-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 123, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #007bff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <!-- Preconnect to Google services -->
+  <!-- ONLY preload the appropriate hero image for the current viewport so we avoid double downloads -->
+  <link rel="preload" as="image" href="assets/images/home/building-top-banner.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/home/building-top-banner-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+
+  
+  <!-- Angular will inject scripts here during build -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fade out the initial loader when the Angular app has rendered children.
+      var loadingDiv = document.getElementById('initial-loader');
+      if (!window.showInitialLoader || !loadingDiv) return;
+
+      var checkAppReady = function () {
+        var appElement = document.querySelector('app-root');
+        if (appElement && appElement.children && appElement.children.length > 2) {
+          loadingDiv.style.opacity = '0';
+          setTimeout(function () { loadingDiv.style.display = 'none'; }, 500);
+          return true;
+        }
+        return false;
+      };
+
+      var readyCheckInterval = setInterval(function () { if (checkAppReady()) clearInterval(readyCheckInterval); }, 100);
+      // Backup timeout to ensure loader is removed after 5s
+      setTimeout(function () { clearInterval(readyCheckInterval); loadingDiv.style.opacity = '0'; setTimeout(function () { loadingDiv.style.display = 'none'; }, 500); }, 5000);
+    });
+  </script>
+<link rel="stylesheet" href="styles.7285b2b34e0e055a.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.7285b2b34e0e055a.css"></noscript>
+
+  <!-- Place the loading element directly in HTML for faster LCP -->
+  <div class="app-loading" id="initial-loader">
+    <div class="spinner"></div>
+    <div class="app-loading-overlay"></div>
+  </div>
+  <!-- Application root: Angular mounts at <app-root> -->
+  <!-- LCP image preload is handled above using media queries in the head. We intentionally avoid
+    adding a globally discoverable hidden <img> that references both variants, because that
+    can make the browser consider both sources and trigger duplicate downloads. -->
+  <app-root></app-root>
+
+  <!-- Delay non-critical scripts until after initial render -->
+  <!-- Non-critical scripts can be delayed via lazy modules or placed in external files -->
+<script src="runtime.bfc7c84d03dd5956.js" type="module"></script><script src="polyfills.2f90121448acf2f7.js" type="module"></script><script src="main.444bc38a4823a766.js" type="module"></script></body></html>

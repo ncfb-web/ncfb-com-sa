@@ -1,0 +1,171 @@
+/* Critical CSS for app preloading and hero component - improves FCP and LCP */
+:root {
+  --primary-dark: #023b50;
+  --primary: #02AFD4;
+}
+
+/* App loading spinner */
+.app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-dark);
+  background-image: url('/assets/images/home/building-top-banner.webp');
+  background-position: center 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 999;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+@media (max-width: 576px) {
+  .app-loading {
+    background-image: url('/assets/images/home/building-top-banner-mobile.webp');
+  }
+}
+
+.app-loading-overlay {
+    position: absolute;
+  top: 50%;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(2, 59, 80, 1) 105%, rgba(2, 59, 80, 1) 100%);
+}
+
+/* Spinner animation */
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Hero component styles */
+.hero {
+  height: 87vh;
+  background: rgb(2, 175, 212);
+  background: linear-gradient(0deg, rgba(2, 175, 212, 1) 0%, rgba(2, 59, 80, 1) 100%);
+  position: relative;
+}
+
+.hero-background {
+  background-image: url('/assets/images/home/building-top-banner-mobile.webp');
+  position: relative;
+  background-size: cover;
+  background-position: center 40px;
+  height: 100%;
+  background-repeat: no-repeat;
+  min-height: 320px;
+}
+
+@media (min-width: 576px) {
+  .hero-background {
+    background-image: url('/assets/images/home/building-top-banner.webp');
+  }
+}
+
+.hero-background-overlay {
+  position: absolute;
+  background: linear-gradient(to bottom, transparent 0%, rgba(2, 59, 80, 1) 105%, rgba(2, 59, 80, 1) 100%);
+  top: 50%;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  z-index: 1;
+}
+
+.hero-carousel {
+  padding-top: 110px;
+  font-size: 30px;
+  line-height: 45px;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+/* Force hero visibility on load */
+.hero-carousel {
+  opacity: 1 !important;
+}
+
+.hero-background {
+  opacity: 1 !important;
+}
+
+/* Force desktop animations to work in production */
+@media (min-width: 992px) {
+  .hero, .hero-background, .hero-carousel {
+    animation-name: fadeIn;
+    animation-duration: 0.01s;
+  }
+}
+
+/* Critical animation keyframes */
+@keyframes title-inner-animation-rotate-small {
+  0%, 31.6666666667% {
+    transform: translateY(0);
+  }
+  31.6666666667%, 63.3333333333% {
+    transform: translateY(-58px);
+  }
+  63.3333333333%, 95% {
+    transform: translateY(-116px);
+  }
+  to {
+    transform: translateY(-116px);
+  }
+}
+
+@keyframes title-inner-animation-rotate-medium {
+  0%, 31.6666666667% {
+    transform: translateY(0);
+  }
+  31.6666666667%, 63.3333333333% {
+    transform: translateY(-70px);
+  }
+  63.3333333333%, 95% {
+    transform: translateY(-150px);
+  }
+  to {
+    transform: translateY(-150px);
+  }
+}
+
+/* Force animations to work on all devices and browser versions */
+.hero-carousel .change-inner {
+  animation: title-inner-animation-rotate-small 4s ease-in-out infinite !important;
+}
+
+@media (min-width: 992px) {
+  .hero-carousel .change-inner {
+    animation: title-inner-animation-rotate-medium 4s ease-in-out infinite !important;
+  }
+}
+
+.hero-carousel-title {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 58px;
+  text-align: center;
+  margin-bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
